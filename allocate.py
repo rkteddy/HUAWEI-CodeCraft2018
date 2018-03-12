@@ -16,3 +16,13 @@ class physical_server:
         self.rest_mem -= vm.mem
         self.cpu_usage_rate = 1 - float(self.rest_cpu) / float(self.cpu)
         self.mem_usage_rate = 1 - float(self.rest_mem) / float( self.mem)
+
+
+# virtual machine class definition
+class virtual_machine:
+
+    def __init__(self, num, cpu, mem):
+        self.num = num
+        self.cpu = cpu
+        self.mem = mem
+        self.cnt = 0
