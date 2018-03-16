@@ -28,3 +28,9 @@ def avg_filter(time_series):
             avg += time_series[i]
             cnt += 1
     avg /= cnt
+
+    for i in range(len(time_series)):
+        if time_series[i] > avg:
+            time_series[i] = avg
+
+    return time_series
