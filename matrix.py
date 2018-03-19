@@ -31,3 +31,28 @@ class matrix:
             self.__matrix[index] = copy.deepcopy(value)
         elif isinstance(index, tuple):
             self.__matrix[index[0]][index[1]] = value
+
+    def __add__(self, N):
+        assert N.rows_ == self.rows_ and N.cols_ == self.cols_, "dimension not match"
+        M = matrix(self.rows_, self.cols_)
+        for i in range(self.rows_):
+            for j in range(self.cols_):
+                M[i, j] = self[i, j] + N[i, j]
+        return M
+
+    def __mul__(self, N):
+        if isinstance(N, int) or isinstance(N, float):
+            M = matrix(self.rows_, self.cols_)
+            for i in range(self.rows_):
+                for j in range(self.cols_):
+                    M[i, j] = self[i, j] * N
+        else:
+            assert N.rows_ == self.cols_, "dimension not match"
+            M = matrix(self.rows_, N.cols_)
+            for i in range(self.rows_):
+                for j in range(N.cols_):
+                    tmp_sum = 0
+                    for k in range(self.cols_):
+                        tmp_sum += self[i, k] * N[k, j]
+                    M[i, j] = tmp_sum
+        return M
