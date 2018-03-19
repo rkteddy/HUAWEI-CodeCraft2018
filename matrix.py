@@ -19,3 +19,15 @@ class matrix:
                 self.shape = (arg_1, arg_2)
             else:
                 raise TypeError("parameters wrong")
+
+    def __getitem__(self, index):
+        if isinstance(index, int):
+            return self.__matrix[index]
+        elif isinstance(index, tuple):
+            return self.__matrix[index[0]][index[1]]
+
+    def __setitem__(self, index, value):
+        if isinstance(index, int):
+            self.__matrix[index] = copy.deepcopy(value)
+        elif isinstance(index, tuple):
+            self.__matrix[index[0]][index[1]] = value
