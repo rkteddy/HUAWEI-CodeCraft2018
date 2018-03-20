@@ -56,3 +56,6 @@ class matrix:
                         tmp_sum += self[i, k] * N[k, j]
                     M[i, j] = tmp_sum
         return M
+
+    def inner_list(self):
+        return self.__matrix
