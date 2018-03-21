@@ -59,3 +59,13 @@ class matrix:
 
     def inner_list(self):
         return self.__matrix
+
+    def row_append(self, N):
+        assert N.cols_ == self.cols_, "dimension not match"
+        self.rows_ += 1
+        self.shape = (self.rows_, self.cols_)
+        for i in range(N.rows_):
+            tmp_list = []
+            for j in range(N.cols_):
+                tmp_list.append(N[i, j])
+            self.__matrix.append(tmp_list)
