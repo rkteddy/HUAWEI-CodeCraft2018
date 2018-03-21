@@ -69,3 +69,10 @@ class matrix:
             for j in range(N.cols_):
                 tmp_list.append(N[i, j])
             self.__matrix.append(tmp_list)
+
+    def col_append(self, N):
+        assert self.rows_ == self.rows_, "dimension not match"
+        self.cols_ += 1
+        self.shape = (self.rows_, self.cols_)
+        for i in range(N.rows_):
+            self.__matrix[i].append(N[i, 0])
