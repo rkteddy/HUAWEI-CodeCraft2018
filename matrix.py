@@ -76,3 +76,8 @@ class matrix:
         self.shape = (self.rows_, self.cols_)
         for i in range(N.rows_):
             self.__matrix[i].append(N[i, 0])
+
+    def col_deque(self):
+        self.cols_ -= 1
+        self.shape = (self.rows_, self.cols_)
+        self.__matrix = [self.__matrix[0][1:]]
