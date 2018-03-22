@@ -81,3 +81,8 @@ class matrix:
         self.cols_ -= 1
         self.shape = (self.rows_, self.cols_)
         self.__matrix = [self.__matrix[0][1:]]
+
+    def show(self):
+        for i in range(self.rows_):
+            for j in range(self.cols_):
+                print self[i][j]
