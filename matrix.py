@@ -99,3 +99,38 @@ class matrix:
         self.__matrix[r1] = self.__matrix[r2]
         self.__matrix[r2] = temp
 
+    def gaussian_row_reduce(self):
+        M = matrix(self.__matrix)
+        rows = M.rows_
+        cols = M.cols_
+        i = rows - 1
+        j = cols - 2
+
+        while i >= 0:
+            k = j - 1
+            while k >= 0:
+                if M[i, k] != 0:
+                    j = k
+                k -= 1
+
+            if M[i, j] != 0:
+                for t in range(i - 1, -1, -1):
+                    for s in range(0, cols):
+                        if s != j:
+                            M[t, s] = M[t, s] - M[i, s] * (M[t, j] / M[i, j])
+                            if EPS > M[t, s] > -EPS:
+                                M[t, s] = 0
+
+                    M[t, j] = 0
+
+                for k in range(j+1, cols):
+                    M[i, k] = M[i, k] / M[i, j]
+                    if -EPS < M[i, k] < EPS:
+                        M[i, k] = 0
+
+                M[i, j] = 1
+
+            i -= 1
+            j -= 1
+
+        return M
