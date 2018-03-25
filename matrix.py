@@ -93,3 +93,9 @@ class matrix:
             for j in range(self.rows_):
                 M[i, j] = self[j, i]
         return M
+
+    def swap_rows(self, r1, r2):
+        temp = copy.deepcopy(self.__matrix[r1])
+        self.__matrix[r1] = self.__matrix[r2]
+        self.__matrix[r2] = temp
+
