@@ -86,3 +86,10 @@ class matrix:
         for i in range(self.rows_):
             for j in range(self.cols_):
                 print self[i][j]
+
+    def transpose(self):
+        M = matrix(self.cols_, self.rows_)
+        for i in range(self.cols_):
+            for j in range(self.rows_):
+                M[i, j] = self[j, i]
+        return M
