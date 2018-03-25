@@ -134,3 +134,44 @@ class matrix:
             j -= 1
 
         return M
+
+    def gaussian_eliminate(self):
+        AB = matrix(self.__matrix)
+        rows = AB.rows_
+        cols = AB.cols_
+        Acols = cols - 1
+
+        i = 0
+        j = 0
+
+        while i < rows:
+            pivot_found = False
+            while j < Acols and not pivot_found:
+                if AB[i, j] != 0:
+                    pivot_found = True
+                else:
+                    max_row = i
+                    max_val = 0
+                    for k in range(i+1, rows):
+                        cur_abs = abs(AB[k, j])
+                        if cur_abs > max_val:
+                            max_row = k
+                            max_val = cur_abs
+                    if max_row != i:
+                        AB.swap_rows(max_row, i)
+                        pivot_found = True
+                    else:
+                        j += 1
+
+            if pivot_found:
+                for t in range(i+1, rows):
+                    for s in range(j+1, cols):
+                        AB[t, s] = AB[t, s] - AB[i, s] * (AB[t, j] / AB[i, j])
+                        if -EPS < AB[t, s] < EPS:
+                            AB[t, s] = 0
+                    AB[t, j] = 0
+
+            i += 1
+            j += 1
+
+        return AB
