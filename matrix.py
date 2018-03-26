@@ -193,3 +193,16 @@ class matrix:
             j += 1
 
         return AB
+
+    def inverse(self):
+        I = identity(self.rows_)
+        AI = augment(self, I)
+        U = AI.gaussian_eliminate()
+        IAInverse = U.gaussian_row_reduce()
+        AInverse = matrix(self.rows_, self.cols_)
+
+        for i in range(AInverse.rows_):
+            for j in range(AInverse.cols_):
+                AInverse[i, j] = IAInverse[i, j+self.cols_]
+
+        return AInverse
