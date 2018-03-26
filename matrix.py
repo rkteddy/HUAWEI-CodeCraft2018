@@ -3,6 +3,17 @@ import copy
 EPS = 1e-10
 
 
+def augment(A, B):
+    AB = matrix(A.rows_, A.cols_+B.cols_)
+    for i in range(AB.rows_):
+        for j in range(AB.cols_):
+            if j < A.cols_:
+                AB[i, j] = A[i, j]
+            else:
+                AB[i, j] = B[i, j - B.cols_]
+    return AB
+
+
 class matrix:
 
     def __init__(self, arg_1, arg_2=0, arg_3=0.0):
