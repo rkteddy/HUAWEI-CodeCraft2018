@@ -3,6 +3,13 @@ import copy
 EPS = 1e-10
 
 
+def identity(n):
+    M = matrix(n, n, 0)
+    for i in range(n):
+        M[i, i] = 1
+    return M
+
+
 def augment(A, B):
     AB = matrix(A.rows_, A.cols_+B.cols_)
     for i in range(AB.rows_):
