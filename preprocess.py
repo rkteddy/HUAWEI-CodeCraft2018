@@ -34,3 +34,9 @@ def avg_filter(time_series):
             time_series[i] = avg
 
     return time_series
+
+
+def get_pow(time_series, n):
+    for i in range(len(time_series)):
+        time_series[i] = abs(time_series[i]) ** n
+    return time_series
