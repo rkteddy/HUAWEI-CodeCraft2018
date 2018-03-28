@@ -50,3 +50,9 @@ def batch_add(time_series, n):
     for i in range(len(time_series)):
         time_series[i] = time_series[i] + n * (i+1) / len(time_series)
     return time_series
+
+
+def add_bias(data_mat):
+    bias_col = matrix(data_mat.rows_, 1, 1)
+    data_mat.col_append(bias_col)
+    return data_mat
