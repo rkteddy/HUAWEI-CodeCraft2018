@@ -20,9 +20,8 @@ def predict_vm(ecs_lines, input_lines):
     sample_server, sample_machine, flavor_list, predict_span, dim_to_be_optimized = read_input(input_lines)
     history_data = read_data(ecs_lines)
     predict_cnt, predict_machine = predict(sample_machine, flavor_list, history_data, predict_span)
-    # server_list = assign_flavors(sample_server, predict_machine)
-    # print(len(server_list) - 1 + server_list[-1].cpu_usage_rate)
-    server_list = simulte_anneal_assign(sample_server, predict_machine, dim_to_be_optimized)
+    server_list = assign_flavors(sample_server, predict_machine)
+    # server_list = simulte_anneal_assign(sample_server, predict_machine, dim_to_be_optimized)
 
     result.append(str(len(predict_machine)))
     for i in range(len(flavor_list)):
@@ -50,8 +49,8 @@ def predict(sample_machine, flavor_list, history_data, predict_span):
         history_data[i] = batch_add(history_data[i], addition)
 
         x_train, y_train, x_last = create_dataset(history_data[i], 10, 1)
-        # lse_model.lse_fit(x_train, y_train)
-        lse_model.ridge_fit(x_train, y_train, 0.2)
+        lse_model.lse_fit(x_train, y_train)
+        # lse_model.ridge_fit(x_train, y_train, 0.2)
 
         for j in range(predict_span):
             predict_val = lse_model.predict(x_last)
