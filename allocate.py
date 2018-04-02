@@ -59,3 +59,63 @@ def assign_flavors(sample_server, machine_list):
     return server_list
 
 
+def get_two_different_randint(min, max):
+    i = random.randint(min, max)
+    j = random.randint(min, max)
+    while j == i:
+        j = random.randint(min, max)
+    return i, j
+
+
+def simulte_anneal_assign(sample_server, machine_list, dim_to_be_optimized):
+    min_score = len(machine_list) + 1
+    server_list = []
+    T = 100
+    Tmin = 1
+    r = 0.99
+    min_score_list = []
+    server_list_list = []
+
+    while T > Tmin:
+        i, j = get_two_different_randint(0, len(machine_list) - 1)
+        new_machine_list = copy.deepcopy(machine_list)
+        new_machine_list[i], new_machine_list[j] = new_machine_list[j], new_machine_list[i]
+        new_server_list = assign_flavors(sample_server, new_machine_list)
+
+        # if "CPU" in dim_to_be_optimized:
+        #     score = len(new_server_list) - 1 + new_server_list[-1].cpu_usage_rate
+        # elif "MEM" in dim_to_be_optimized:
+        #     score = len(new_server_list) - 1 + new_server_list[-1].mem_usage_rate
+        if "CPU" in dim_to_be_optimized:
+            machine_cpu = 0
+            for i in range(len(machine_list)):
+                machine_cpu += machine_list[i].cpu
+            server_cpu = len(new_server_list) * sample_server.cpu
+            score = len(new_server_list) - 1 + new_server_list[-1].cpu_usage_rate
+        elif "MEM" in dim_to_be_optimized:
+            score = len(new_server_list) - 1 + new_server_list[-1].mem_usage_rate
+        else:
+            print("Wrong dimension")
+
+        if score < min_score:
+            min_score = score
+            machine_list = new_machine_list
+            server_list = new_server_list
+        else:
+            if (math.exp(min_score - score) / T) > (random.randint(0, 10000) / 10000):
+                min_score_list.append(min_score)
+                server_list_list.append(server_list)
+                min_score = score
+                machine_list = new_machine_list
+                server_list = new_server_list
+
+        T = r * T
+
+    min_index = min_score_list.index(min(min_score_list))
+    server_list = server_list_list[min_index]
+    print(min(min_score_list))
+
+    return server_list
+
+
+
