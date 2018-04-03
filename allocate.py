@@ -72,7 +72,7 @@ def simulte_anneal_assign(sample_server, machine_list, dim_to_be_optimized):
     server_list = []
     T = 100
     Tmin = 1
-    r = 0.99
+    r = 0.9
     min_score_list = []
     server_list_list = []
 
