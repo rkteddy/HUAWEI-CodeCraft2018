@@ -82,10 +82,6 @@ def simulte_anneal_assign(sample_server, machine_list, dim_to_be_optimized):
         new_machine_list[i], new_machine_list[j] = new_machine_list[j], new_machine_list[i]
         new_server_list = assign_flavors(sample_server, new_machine_list)
 
-        # if "CPU" in dim_to_be_optimized:
-        #     score = len(new_server_list) - 1 + new_server_list[-1].cpu_usage_rate
-        # elif "MEM" in dim_to_be_optimized:
-        #     score = len(new_server_list) - 1 + new_server_list[-1].mem_usage_rate
         if "CPU" in dim_to_be_optimized:
             machine_cpu = 0
             for i in range(len(machine_list)):
