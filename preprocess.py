@@ -17,6 +17,9 @@ def create_dataset(time_series, time_step, predict_span):
     for i in range(cols):
         x_last[0, i] = time_series[i-cols]
 
+    x_train = gaussian_weighted(x_train)
+    x_last = gaussian_weighted(x_last)
+
     return x_train, y_train, x_last
 
 
