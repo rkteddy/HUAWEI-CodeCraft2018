@@ -52,6 +52,15 @@ def batch_add(time_series, n):
     return time_series
 
 
+def gaussian_weighted(data_mat):
+    for i in range(data_mat.rows_):
+        for j in range(data_mat.cols_):
+            p = 0.001
+            w = math.exp(- math.pow(data_mat[i, j] - data_mat[i, -1], 2) / 2 * p)
+            data_mat[i, j] = w * data_mat[i, j]
+    return data_mat
+
+
 def add_bias(data_mat):
     bias_col = matrix(data_mat.rows_, 1, 1)
     data_mat.col_append(bias_col)
