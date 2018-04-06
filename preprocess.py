@@ -46,10 +46,6 @@ def get_pow(time_series, n):
 
 
 def batch_add(time_series, n):
-    # n = 0
-    # for i in range(len(time_series)):
-    #     n += time_series[i]
-    # n /= len(time_series)
     for i in range(len(time_series)):
         time_series[i] = time_series[i] + n * (i+1) / len(time_series)
     return time_series
