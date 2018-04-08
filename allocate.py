@@ -50,12 +50,6 @@ def assign_flavors(sample_server, machine_list):
         else:
             server_list.append(copy.deepcopy(sample_server))
             server_list[-1].add_vm(machine_list[i])
-
-    # for i in range(len(server_list)):
-    #     print("Server " + str(i+1) + ": ")
-    #     for j in range(len(server_list[i].vm_cnt)):
-    #         print(server_list[i].vm_cnt[j])
-
     return server_list
 
 
