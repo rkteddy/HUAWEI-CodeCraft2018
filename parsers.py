@@ -69,8 +69,6 @@ def read_data(ecs_lines):
                     history_data[temp_flavor][value] += 1
                 else:
                     pass
-            #                print('Flavor data error.\n')
-            #                print('Now flavor: ' + str(temp_flavor))
             else:
                 print('Time data error.\n')
 
