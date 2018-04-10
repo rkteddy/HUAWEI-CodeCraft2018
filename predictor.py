@@ -49,7 +49,6 @@ def predict(sample_machine, flavor_list, history_data, predict_span):
         history_data[i] = batch_add(history_data[i], addition)
 
         x_train, y_train, x_last = create_dataset(history_data[i], 10, 1)
-        # lse_model.lse_fit(x_train, y_train)
         lse_model.ridge_fit(x_train, y_train, 0.2)
 
         for j in range(predict_span):
