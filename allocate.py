@@ -112,6 +112,3 @@ def simulte_anneal_assign(sample_server, machine_list, dim_to_be_optimized):
     print(min(min_score_list))
 
     return server_list
-
-
-
